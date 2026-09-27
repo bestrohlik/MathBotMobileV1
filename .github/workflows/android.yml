@@ -12,23 +12,25 @@ jobs:
 
     steps:
       - name: Stáhnout projekt
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4
 
       - name: Nastavit Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Nastavit Java 17
-        uses: actions/setup-java@v6
+        uses: actions/setup-java@v4
         with:
           java-version: "17"
           distribution: "temurin"
 
       - name: Nastavit Android SDK
-        uses: android-actions/setup-android@v4
-        with:
-          packages: "platform-tools"
+        uses: android-actions/setup-android@v3
+
+      - name: Instalace Android Build Tools
+        run: |
+          sdkmanager "platform-tools" "build-tools;35.0.0" "platforms;android-35"
 
       - name: Instalace Buildozeru
         run: |
